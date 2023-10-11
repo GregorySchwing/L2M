@@ -159,12 +159,12 @@ if __name__ == "__main__":
                                              max_grad_norm=max_grad_norm,
                                              device=device)
 
+        print("Device", device)
+        print("Torch Version", torch.__version__)
+        print("CUDA Is Available", torch.cuda.is_available())
+        print("CUDA Current Device", torch.cuda.current_device())
         # Train Model
         for update_t in tqdm(range(max_update_t), unit="update"):
-            print(device)
-            print(torch.__version__)
-            print(torch.cuda.is_available())
-            print(torch.cuda.current_device())
             if update_t == 0 or torch.all(done).item():
                 try:
                     g = next(train_data_iter)

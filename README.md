@@ -17,7 +17,19 @@
 - <mark>LwD</mark>@[Learning What to Defer for Maximum Independent Sets](https://github.com/sungsoo-ahn/learning_what_to_defer)
 - <mark>DGL-TreeSearch</mark>@[WHAT’S WRONG WITH DEEP LEARNING IN TREE SEARCH FOR COMBINATORIAL OPTIMIZATION](https://github.com/MaxiBoether/mis-benchmark-framework)
 
+#### INSTALL
+
+    sudo docker run --gpus all --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 --rm -v ./:/L2M/ -it -p 8888:8888  nvcr.io/nvidia/pytorch:22.07-py3
+    
+    pip install  dgl -f https://data.dgl.ai/wheels/cu118/repo.html
+    
+    pip install  dglgo -f https://data.dgl.ai/wheels-test/repo.html
+
 #### Running
+
+    sudo docker run --gpus all --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 --rm -v ./:/L2M/ -it -p 8888:8888  nvcr.io/nvidia/pytorch:22.07-py3
+    
+    cd /L2M
 
 For training,  
 
