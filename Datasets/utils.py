@@ -4,8 +4,8 @@ import numpy as np
 from pathlib import Path
 from torch.utils.data import Dataset
 import torch
-from jgrapht.convert import from_nx
-from jgrapht.algorithms.matching import blossom5_max_weight
+#from jgrapht.convert import from_nx
+#from jgrapht.algorithms.matching import blossom5_max_weight
 
 
 def get_eid_weight(g):
@@ -20,11 +20,10 @@ def get_eid_weight(g):
 def get_label(g):
     label_map = {edge: 0 for edge in g.edges}
     nx.set_edge_attributes(g, values=label_map, name='label')
-    jg = from_nx(g)
-    m = blossom5_max_weight(jg)[1]
+    m = nx.max_weight_matching(g)
+    print(m)
     for e in m:
-        u, v, _ = jg.edge_tuple(e)
-        g.edges[u, v]['label'] = 1
+        g.edges[e]['label'] = 1
     return g
 
 
@@ -141,7 +140,7 @@ def get_dataset(mode='train',
         raise ValueError(error_mess)
 
     # Rand Dataset Only
-    if mode == 'train':
+    if mode == 'train' or mode == 'vali':
 
         def generate_fn():
             num_nodes = np.random.randint(min_n, max_n)

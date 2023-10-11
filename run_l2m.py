@@ -2,6 +2,7 @@ from pathlib import Path
 import argparse
 from time import time
 import pandas as pd
+from tqdm import tqdm
 
 import torch
 from torch.utils.data import DataLoader
@@ -159,7 +160,11 @@ if __name__ == "__main__":
                                              device=device)
 
         # Train Model
-        for update_t in range(max_update_t):
+        for update_t in tqdm(range(max_update_t), unit="update"):
+            print(device)
+            print(torch.__version__)
+            print(torch.cuda.is_available())
+            print(torch.cuda.current_device())
             if update_t == 0 or torch.all(done).item():
                 try:
                     g = next(train_data_iter)
